@@ -8,12 +8,28 @@
 const express = require("express")
 const env = require("dotenv").config()
 const app = express()
-const static = require("./routes/static")
+const expressLayouts = require("express-ejs-layouts")
+// const static = require("./routes/static")
+
+
+/* ***********************
+ * View Engine and Templates //  O Express precisa já saber que está usando o layout e o view engine antes de processar qualquer rota. Então esse bloco vem antes das Rotas.
+ *************************/
+app.set("view engine", "ejs"); 
+app.use(expressLayouts);
+app.set("layout", "./layouts/layout") // not at views root
 
 /* ***********************
  * Routes
  *************************/
-app.use(static)
+app.use(require("./routes/static")) // Static Routes
+
+// Index Route
+app.get('/', function(req,res){
+  res.render('index', { title: "Home" }) 
+})
+
+
 
 /* ***********************
  * Local Server Information
@@ -21,6 +37,7 @@ app.use(static)
  *************************/
 const port = process.env.PORT
 const host = process.env.HOST
+
 
 /* ***********************
  * Log statement to confirm server operation
