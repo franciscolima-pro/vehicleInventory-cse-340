@@ -4,3 +4,180 @@
 *:after {
   box-sizing: border-box;
 }
+h1, h2, h3{
+  font-family: "Roboto", sans-serif;
+}
+
+p, li, a{
+  font-family: "Poppins", sans-serif;
+}
+
+#top-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;            
+  padding: 1em 0;
+}
+
+#top-header a{
+  text-decoration: none;
+  color: black;
+}
+
+.siteName{
+  font-weight: bold;
+  font-size: 1.8rem;
+}
+
+h2{
+  margin: 1em 0;
+  font-weight: bold;
+}
+
+nav ul{
+  list-style: none;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  padding: 1em;
+  background-color: black;
+  color: white;
+}
+
+nav ul li a{
+  text-decoration: none;
+  color: white;
+}
+
+.vehicle{
+  position: relative;
+  margin: 1em 0 2em 0;
+}
+
+#heroImage:first-of-type {
+  display: block;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.vehicle-details{
+  width: 50%;
+  color: #4C96D7;
+  position: absolute;
+  top: 15px;
+  background-color: rgba(255, 255, 255, 0.7);
+  padding: 0.5em;
+  border-radius: 8px;
+  margin: 0;
+}
+
+.vehicle-details p, h2{
+  margin: 0;
+}
+
+.vehicle-details img{
+  width: 60%;
+}
+
+.vehicle-details button{
+  background: none;
+  border: none;
+  padding: 0;
+  text-align: left;
+}
+
+.vehicle-details button:hover{
+  cursor: pointer;
+  scale: 1.05;
+}
+
+.reviews ul li{
+  margin-bottom: 1em;
+}
+
+.upgrades-section h2{
+  margin: 1em 0;
+}
+
+.upgrades{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1em;
+}
+
+.upgrade{
+  text-align: center;
+}
+
+.upgrade-img{
+  background-color: #01B0D3;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid black;
+  padding: 1em;
+  width: 100%;
+  height: 7rem;
+}
+
+@media (min-width: 768px) {
+  body {
+  background-image: url('../images/site/small_check.jpg'); /* ajuste o caminho */
+  background-size: cover;     /* faz a imagem cobrir toda a tela */
+  background-repeat: no-repeat;
+  background-position: center center;
+  padding: 0 7rem;
+}
+
+#wrapper{
+  background-color: white;
+  border-radius: 8px;
+  border: 5px solid #01B0D3;
+  padding: 1em;
+}
+
+.vehicle{
+  margin-bottom: 8rem;
+}
+
+  #heroImage:first-of-type {
+    width: 50%;
+  }
+
+  #welcome-h2{
+    font-size: 2rem;
+  }
+
+  .vehicle-details p, h2{
+    margin: 1em 0;
+  }
+
+  .vehicle-details{
+  width: fit-content; 
+  top: 5px;
+  left: 15%;
+  padding: 0;
+  font-size: 1.5em;
+}
+
+.vehicle-more-details{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3em;
+}
+.reviews {
+    order: 2; /* joga para a segunda coluna */
+  }
+
+  .reviews ul li {
+    margin-bottom: 1.5em;
+  }
+}
+
+@media (min-width: 820px) {
+  .vehicle-details p, h2{
+    margin: 0;
+  }
+
+}
