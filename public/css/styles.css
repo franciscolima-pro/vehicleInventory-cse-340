@@ -121,11 +121,10 @@ nav ul li a{
   height: 7rem;
 }
 
-
 /* Inventory Page CSS */
 #inv-display{
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr;
   gap: 2rem;
 
 }
@@ -151,6 +150,7 @@ nav ul li a{
   margin: 20px 0;    /* Espaçamento externo (opcional) */
 
 }
+
 
 @media (min-width: 768px) {
   body {
@@ -204,11 +204,22 @@ nav ul li a{
   .reviews ul li {
     margin-bottom: 1.5em;
   }
+
+  /* Inventory Page CSS */
+#inv-display{
+  grid-template-columns: 1fr 1fr 1fr;
 }
 
-@media (min-width: 820px) {
+}
+
+@media (min-width: 820px) and (max-width: 1100px) {
   .vehicle-details p, h2{
     margin: 0;
   }
+
+    /* Inventory Page CSS */
+#inv-display{
+  grid-template-columns: 1fr 1fr;
+}
 
 }
