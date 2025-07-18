@@ -121,6 +121,37 @@ nav ul li a{
   height: 7rem;
 }
 
+
+/* Inventory Page CSS */
+#inv-display{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 2rem;
+
+}
+
+#inv-display li{
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  list-style-type: none;
+  border: 1px solid gray;
+  border-radius: 0.4em;
+  text-align: center;
+}
+
+
+.namePrice h2{
+  margin: 0.5em 0;
+}
+
+.namePrice hr{
+  height: 5px;       /* Controla a espessura (quanto maior, mais grosso) */
+  background-color: #000; /* Cor da linha */
+  border: none;      /* Remove bordas padrão (opcional) */
+  margin: 20px 0;    /* Espaçamento externo (opcional) */
+
+}
+
 @media (min-width: 768px) {
   body {
   background-image: url('../images/site/small_check.jpg'); /* ajuste o caminho */
