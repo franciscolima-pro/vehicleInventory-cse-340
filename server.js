@@ -35,7 +35,7 @@ app.use("/inv", utilities.handleErrors(inventoryRoute))
 // Detail routes
 app.use("/inv", utilities.handleErrors(detailRoute))
 // error test routes
-app.use('/', errorRoute);
+app.use('/', utilities.handleErrors(errorRoute));
 
 /* ***********************
 * File Not Found Route - must be last route in list
