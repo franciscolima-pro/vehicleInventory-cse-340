@@ -11,8 +11,9 @@ const app = express();
 const expressLayouts = require("express-ejs-layouts");
 const baseController = require("./controllers/baseController");
 const inventoryRoute = require("./routes/inventoryRoute");
+const detailRoute = require("./routes/detailRoute");
+const errorRoute = require('./routes/errorRoute');
 const utilities = require("./utilities");
-// const static = require("./routes/static")
 
 
 /* ***********************
@@ -30,7 +31,12 @@ app.use(require("./routes/static"))
 // Index Route
 app.get('/', utilities.handleErrors(baseController.buildHome))
 // Inventory routes
-app.use("/inv", inventoryRoute)
+app.use("/inv", utilities.handleErrors(inventoryRoute))
+// Detail routes
+app.use("/inv", utilities.handleErrors(detailRoute))
+// error test routes
+app.use('/', errorRoute);
+
 /* ***********************
 * File Not Found Route - must be last route in list
 * Place after all routes
@@ -47,7 +53,9 @@ app.use(async (req, res, next) => {
 app.use(async (err, req, res, next) => {
   let nav = await utilities.getNav()
   console.error(`Error at: "${req.originalUrl}": ${err.message}`)
-   if(err.status == 404){ message = err.message} else {message = 'Oh no! There was a crash. Maybe try a different route?'}
+   if(err.status == 404){ message = err.message}
+   else if(err.status == 500){message = err.message}
+   else {message = 'Oh no! There was a crash. Maybe try a different route?'}
   res.render("errors/error", {
     title: err.status || 'Server Error',
     message,

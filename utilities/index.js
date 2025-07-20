@@ -57,6 +57,40 @@ Util.buildClassificationGrid = async function(data){
   return grid
 }
 
+/* **************************************
+* Build the Details view HTML
+* ************************************ */
+Util.buildInvGrid = async function(data){
+  let gridDetail
+  if(data.length > 0){
+    gridDetail = '<div id="details-display">'
+    gridDetail += '<div class="car-img">'
+    gridDetail += '<img src="' + data[0].inv_image +'">'
+    gridDetail += '</div>'
+    gridDetail += '<div class="car-details">'
+    gridDetail += '<span>'
+    gridDetail += '<strong>' + data[0].inv_make + ' ' + data[0].inv_model + ' ' + 'Details' + '</strong>'
+    gridDetail += '</span>'
+    gridDetail += '<p>'
+    gridDetail += '<strong>Price: $' + new Intl.NumberFormat('en-US').format(data[0].inv_price) + '</strong>'
+    gridDetail += '</p>'
+    gridDetail += '<p>'
+    gridDetail += '<strong>Description:</strong> ' + data[0].inv_description
+    gridDetail += '</p>'
+    gridDetail += '<p>'
+    gridDetail += '<strong>Color: </strong>' + data[0].inv_color
+    gridDetail += '</p>'
+    gridDetail += '<p>'
+    gridDetail += '<strong>Miles:</strong> ' + new Intl.NumberFormat('en-US').format(data[0].inv_miles)
+    gridDetail += '</p>'
+    gridDetail += '</div>'
+    gridDetail += '</div>'
+  } else { 
+    gridDetail = '<p class="notice-details">Sorry, no vehicles details could be found.</p>'
+  }
+  return gridDetail
+}
+
 /* ****************************************
  * Middleware For Handling Errors
  * Wrap other function in this for 

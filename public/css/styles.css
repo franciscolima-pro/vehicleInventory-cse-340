@@ -4,7 +4,7 @@
 *:after {
   box-sizing: border-box;
 }
-h1, h2, h3{
+h1, h2, h3, span{
   font-family: "Roboto", sans-serif;
 }
 
@@ -151,6 +151,21 @@ nav ul li a{
 
 }
 
+/* Details view CSS */
+
+#details-display img{
+  width: 100%;
+  margin-bottom: 0.5em;
+}
+
+#details-display span{
+  font-size: larger;
+}
+
+#details-display p:nth-child(even){
+  background-color: rgba(128, 128, 128, 0.31);
+  padding: 0.5em;
+}
 
 @media (min-width: 768px) {
   body {
@@ -208,6 +223,14 @@ nav ul li a{
   /* Inventory Page CSS */
 #inv-display{
   grid-template-columns: 1fr 1fr 1fr;
+}
+
+/* Details view CSS */
+
+#details-display{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
 }
 
 }
