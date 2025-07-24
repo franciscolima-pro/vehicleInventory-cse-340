@@ -1,6 +1,7 @@
 <h1><%= title %></h1>
 
 <%# messages() %>
+
 <div class="form-login-desktop">
     <div class="form-login">
         <form action="" method="post">
@@ -10,12 +11,12 @@
             <input type="password" name="account_password" id="account-password">
             <div class="form-login-submit">
                 <p>
-                    <input type="submit" value="Login">
+                    <input type="submit"  title="<%= title %>" value="Login">
                 </p>
             </div>
         </form>
         <div class="signup-link">
-        <p> No account? <a href="signup">Sign-up</a></p>
+        <p> No account? <a href="register"  title="Sign-up">Sign-up</a></p>
         </div>
     </div>
 </div>
