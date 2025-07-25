@@ -1,14 +1,20 @@
 <h1><%= title %></h1>
 
-<%# messages() %>
+<%- messages() %>
 
 <div class="form-login-desktop">
     <div class="form-login">
         <form action="" method="post">
             <label for="account_email"><strong>Email:</strong></label>
-            <input type="email" name="account_email" id="account-email">
+            <input type="email" name="account_email" id="account-email" required placeholder="user@example.com">
+
             <label for="account_password"><strong>Password:</strong></label>
-            <input type="password" name="account_password" id="account-password">
+            <div class="pword">
+                <span>Passwords must be at least 12 characters and contain at least 1 number, 1 capital letter and 1 special character</span>
+            </div> 
+            <input type="password" name="account_password" id="account-password" required pattern="(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+"
+               title="Must contain: 12+ characters, 1 uppercase, 1 number, 1 special character (@$!%*?&)" required minlength="12">
+
             <div class="form-login-submit">
                 <p>
                     <input type="submit"  title="<%= title %>" value="Login">

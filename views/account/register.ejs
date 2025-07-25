@@ -3,16 +3,23 @@
 <%# messages() %>
 <div class="form-login-desktop">
     <div class="form-login">
-        <form action="" method="post">
+        <form action="/account/register" method="post">
             <label for="account_firstname"><strong>First name:</strong></label>
             <input type="text" name="account_firstname" id="account-firstname" required>
+
             <label for="account_lastname"><strong>Last name:</strong></label>
             <input type="text" name="account_lastname" id="account-lastname" required>
+
             <label for="account_email"><strong>Email address:</strong></label>
-            <input type="email" name="account_email" required>
+            <input type="email" name="account_email" required placeholder="user@example.com">
+
             <label for="account_password"><strong>Password:</strong></label>
+            <div class="pword">
+                <span>Passwords must be at least 12 characters and contain at least 1 number, 1 capital letter and 1 special character</span>
+            </div> 
             <input type="password" name="account_password" pattern="(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+"
                title="Must contain: 12+ characters, 1 uppercase, 1 number, 1 special character (@$!%*?&)" required minlength="12">
+
             <div class="form-login-submit">
                 <p>
                     <input title="<%= title %>" type="submit" value="Register">
