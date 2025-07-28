@@ -1,0 +1,53 @@
+<h1><%= title %></h1>
+
+<% if (errors) { %>
+  <ul class="notice">
+ <% errors.array().forEach(error => { %>
+   <li><%= error.msg %></li>
+<%  }) %>
+ </ul>
+<% } %>
+<%- messages() %>
+
+<div class="form-login-desktop">
+    <div class="form-login">
+        <form action="/inv/add-inventory" method="post">
+            <label><strong>Classification</strong></label>
+            <%- list %>
+
+            <label for="inv_make"><strong>Make</strong></label>
+            <input type="text" name="inv_make" id="inv_make" required value="<%= locals.inv_make %>" minlength="2" maxlength="50" pattern="[A-Za-z0-9\- ]+" title="2-50 characters (letters, numbers, hyphens)">
+
+            <label for="inv_model"><strong>Model</strong></label>
+            <input type="text" name="inv_model" id="inv_model" required value="<%= locals.inv_model %>" minlength="2" maxlength="50" pattern="[A-Za-z0-9\- ]+" title="2-50 characters (letters, numbers, hyphens)">
+
+            <label for="inv_description"><strong>Description</strong></label>
+            <input type="text" name="inv_description" id="inv_description" required value="<%= locals.inv_description %>" minlength="10" maxlength="50" title="10-500 characters (letters, numbers, basic punctuation)">
+
+            <label for="inv_image"><strong>Image Path</strong></label>
+            <input type="text" name="inv_image" id="inv_image" required value="<%= locals.inv_image %>" pattern="[\/\w\-\.]+\.(jpg|jpeg|png|webp|gif)" title="Valid image path ending with .jpg, .jpeg, .png, .webp or .gif">
+
+            <label for="inv_thumbnail"><strong>Thumbnail Path</strong></label>
+            <input type="text" name="inv_thumbnail" id="inv_thumbnail" required value="<%= locals.inv_thumbnail %>" pattern="[\/\w\-\.]+\.(jpg|jpeg|png|webp|gif)" title="Valid image path ending with .jpg, .jpeg, .png, .webp or .gif">
+
+            <label for="inv_price"><strong>Price</strong></label>
+            <input type="number" name="inv_price" id="inv_price" required value="<%= locals.inv_price %>" title="Positive number with up to 2 decimal places (e.g. 25000.99)">
+
+            <label for="inv_year"><strong>Year</strong></label>
+            <input type="number" name="inv_year" id="inv_year" required value="<%= locals.inv_year %>" min="1900"
+  max="<%= new Date().getFullYear() + 1 %>" title="Valid year between 1900 and <%= new Date().getFullYear() + 1 %>">
+
+            <label for="inv_miles"><strong>Miles</strong></label>
+            <input type="number" name="inv_miles" id="inv_miles" required value="<%= locals.inv_miles %>" title="Positive whole number (no decimals)">
+
+            <label for="inv_color"><strong>Color</strong></label>
+            <input type="text" name="inv_color" id="inv_color" required value="<%= locals.inv_color %>" pattern="[A-Za-z\s]+" title="Letters and spaces only (no numbers or special characters)">
+
+            <div class="form-login-submit">
+                <p>
+                    <input type="submit"  title="Add Inventory" value="Add Inventory">
+                </p>
+            </div>
+        </form>
+    </div>
+</div>

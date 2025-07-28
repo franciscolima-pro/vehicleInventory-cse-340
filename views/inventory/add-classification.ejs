@@ -1,0 +1,30 @@
+<h1><%= title %></h1>
+
+<% if (errors) { %>
+  <ul class="notice">
+ <% errors.array().forEach(error => { %>
+   <li><%= error.msg %></li>
+<%  }) %>
+ </ul>
+<% } %>
+<%- messages() %>
+
+<div class="form-login-desktop">
+    <div class="form-login">
+        <form action="/inv/add-classification" method="post">
+            <label for="classification_name"><strong>Classification Name</strong></label>
+            <div class="pword">
+                <span>
+                    The classification name must: 1 - Contain only alphabetic characters (A-Z, a-z, no numbers or symbols) 2- Have no spaces or special characters (including hyphens) 3 - Be unique (not match any existing classification)
+                </span>
+            </div>
+            <input type="text" name="classification_name" id="classification_name" required value="<%= locals.classification_name %>" pattern="[A-Za-z]+">
+
+            <div class="form-login-submit">
+                <p>
+                    <input type="submit"  title="Add Classification" value="Add Classification">
+                </p>
+            </div>
+        </form>
+    </div>
+</div>

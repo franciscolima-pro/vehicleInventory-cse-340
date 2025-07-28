@@ -41,4 +41,75 @@ async function getInventoryDataByinvId(inv_id) {
   }
 }
 
-module.exports = {getClassifications, getInventoryByClassificationId, getInventoryDataByinvId};
+/* ***************************
+ *  Add classification
+ * ************************** */
+async function addClassification(classification_name){
+  try{
+    const classes = await getClassifications();
+
+    const alreadyExists = classes.rows.some(
+      row => row.classification_name.toLowerCase() === classification_name.toLowerCase()
+    );
+
+    if (!alreadyExists) {
+      const sql = 'INSERT INTO classification (classification_name) VALUES ($1) RETURNING *';
+      return await pool.query(sql, [classification_name])
+    }
+    
+  }catch(error){
+    console.error("addClassification error: " + error)
+  }
+}
+
+/* ***************************
+ *  Add Inventory
+ * ************************** */
+async function addInventoryItem(
+ inv_make,
+  inv_model,
+  inv_description,
+  inv_image,
+  inv_thumbnail,
+  inv_price,
+  inv_year,
+  inv_miles,
+  inv_color,
+  classification_id
+) {
+  try {
+    const sql = `
+      INSERT INTO inventory (
+        inv_make,
+        inv_model,
+        inv_description,
+        inv_image,
+        inv_thumbnail,
+        inv_price,
+        inv_year,
+        inv_miles,
+        inv_color,
+        classification_id
+      ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
+      RETURNING *
+    `;
+    
+    return await pool.query(sql, [
+      inv_make,
+      inv_model,
+      inv_description,
+      inv_image,
+      inv_thumbnail,
+      inv_price,
+      inv_year,
+      inv_miles,
+      inv_color,
+      classification_id
+    ]);
+    
+  } catch (error) {
+    console.error("addInventoryItem error:", error);
+    throw error; // Re-throw for controller handling
+  }
+}
+module.exports = {getClassifications, getInventoryByClassificationId, getInventoryDataByinvId, addClassification, addInventoryItem};

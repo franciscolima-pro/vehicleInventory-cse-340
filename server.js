@@ -13,12 +13,15 @@ const expressLayouts = require("express-ejs-layouts");
 const baseController = require("./controllers/baseController");
 const inventoryRoute = require("./routes/inventoryRoute");
 const detailRoute = require("./routes/detailRoute");
+const managementRoute = require("./routes/managementRoute");
+const addClassificationRoute = require("./routes/addClassificationRoute");
+const addInventoryRoute = require("./routes/addInventoryRoute");
 const errorRoute = require('./routes/errorRoute');
-const accountRoute = require('./routes/accountRoute')
+const accountRoute = require('./routes/accountRoute');
 const utilities = require("./utilities");
-const session = require("express-session")
-const pool = require('./database/')
-const bodyParser = require("body-parser")
+const session = require("express-session");
+const pool = require('./database/');
+const bodyParser = require("body-parser");
 
 /* ***********************
  * Middleware
@@ -64,6 +67,12 @@ app.get('/', utilities.handleErrors(baseController.buildHome))
 app.use("/inv", utilities.handleErrors(inventoryRoute))
 // Detail routes
 app.use("/inv", utilities.handleErrors(detailRoute))
+// Management routes
+app.use('/inv', utilities.handleErrors(managementRoute));
+// Add classification routes
+app.use('/inv', utilities.handleErrors(addClassificationRoute));
+// Add classification routes
+app.use('/inv', utilities.handleErrors(addInventoryRoute));
 // error test routes
 app.use('/', utilities.handleErrors(errorRoute));
 // Account routes
