@@ -22,6 +22,7 @@ const utilities = require("./utilities");
 const session = require("express-session");
 const pool = require('./database/');
 const bodyParser = require("body-parser");
+const cookieParser = require("cookie-parser")
 
 /* ***********************
  * Middleware
@@ -44,9 +45,15 @@ app.use(function(req, res, next){
   next()
 })
 
-//body parser mMiddleware
+//body parsermMiddleware
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
+
+//cookie parser Middleware
+app.use(cookieParser())
+
+//jsonwebtoken verify Middleware
+app.use(utilities.checkJWTToken)
 
 /* ***********************
  * View Engine and Templates //  O Express precisa já saber que está usando o layout e o view engine antes de processar qualquer rota. Então esse bloco vem antes das Rotas.

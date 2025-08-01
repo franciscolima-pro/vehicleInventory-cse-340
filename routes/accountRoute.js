@@ -8,6 +8,7 @@ router.get("/login", utilities.handleErrors(invController.buildLogin));
 
 router.get("/register", utilities.handleErrors(invController.buildRegister));
 
+// Process the register attempt
 router.post("/register", 
     regValidate.registationRules(),
     regValidate.checkRegData,
@@ -19,9 +20,13 @@ router.post(
   "/login",
   regValidate.loginRules(),
   regValidate.checkRegDataLogin,
-  (req, res) => {
-    res.status(200).send('login process')
-  }
+  utilities.handleErrors(invController.accountLogin)
 )
+
+//Account management route
+router.get("/management",
+  utilities.checkLogin,
+  utilities.handleErrors(invController.buildAccountManagement)
+);
 
 module.exports = router;
