@@ -157,4 +157,43 @@ Util.checkJWTToken = (req, res, next) => {
   }
  }
 
+ /* ****************************************
+* Middleware to check token Account Authorization
+**************************************** */
+ Util.checkAdminAccess = (req, res, next) => {
+  if (req.cookies.jwt) {
+    jwt.verify(
+      req.cookies.jwt,
+      process.env.ACCESS_TOKEN_SECRET,
+      function (err, accountData) {
+        if (err) {
+          req.flash("notice", "Session expired. Please log in again.");
+          res.clearCookie("jwt");
+          return res.redirect("/account/login");
+        }
+
+        // Verifica se é Employee ou Admin
+        if (accountData.account_type !== 'Employee' && accountData.account_type !== 'Admin') {
+          req.flash("notice", "You don't have administrative privileges.");
+          return res.redirect("/account/login");
+        }
+
+        // Adiciona dados à response
+        res.locals.accountData = accountData;
+        res.locals.loggedin = true;
+        next();
+      }
+    );
+  } else {
+    req.flash("notice", "Please log in to access this page.");
+    res.redirect("/account/login");
+  }
+};
+
+//clear JWT
+ Util.clearCookie = (req, res, next) => {
+  res.clearCookie("jwt");
+  next();
+ }
+
 module.exports = Util

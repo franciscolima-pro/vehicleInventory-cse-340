@@ -31,7 +31,7 @@ async function getInventoryByClassificationId(classification_id) {
 async function getInventoryDataByinvId(inv_id) {
   try {
     const data = await pool.query(
-      `SELECT inv_image, inv_thumbnail, inv_year, inv_make, inv_model, inv_price, inv_description, inv_color, inv_miles 
+      `SELECT inv_id, inv_image, inv_thumbnail, inv_year, inv_make, inv_model, inv_price, inv_description, inv_color, inv_miles, classification_id
       FROM inventory AS i WHERE i.inv_id = $1`, // The "$1" is a placeholder, which will be replaced by the value shown in the brackets "[]" when the SQL statement is run
       [inv_id]
     )
@@ -112,4 +112,58 @@ async function addInventoryItem(
     throw error; // Re-throw for controller handling
   }
 }
-module.exports = {getClassifications, getInventoryByClassificationId, getInventoryDataByinvId, addClassification, addInventoryItem};
+
+/* ***************************
+ *  Update Inventory Item
+ * ************************** */
+async function updateInventoryItem(
+  inv_id,
+  inv_make,
+  inv_model,
+  inv_description,
+  inv_image,
+  inv_thumbnail,
+  inv_price,
+  inv_year,
+  inv_miles,
+  inv_color,
+  classification_id
+) {
+  try {
+    const sql = "UPDATE public.inventory SET inv_make = $1, inv_model = $2, inv_description = $3, inv_image = $4, inv_thumbnail = $5, inv_price = $6, inv_year = $7, inv_miles = $8, inv_color = $9, classification_id = $10 WHERE inv_id = $11 RETURNING *";
+    
+    const data =  await pool.query(sql, [
+      inv_make,
+      inv_model,
+      inv_description,
+      inv_image,
+      inv_thumbnail,
+      inv_price,
+      inv_year,
+      inv_miles,
+      inv_color,
+      classification_id,
+      inv_id
+    ]);
+    return data.rows[0]
+  } catch (error) {
+    console.error("updateInventory error:", error);
+    throw error; // Re-throw for controller handling
+  }
+}
+
+/* ***************************
+ *  Delete Inventory Item
+ * ************************** */
+async function deleteInventoryItem(inv_id) {
+  try {
+    const sql = 'DELETE FROM inventory WHERE inv_id = $1';
+    const data =  await pool.query(sql, [inv_id]);
+    return data
+  } catch (error) {
+    console.error("deleteInventory error:", error);
+    throw error; // Re-throw for controller handling
+  }
+}
+
+module.exports = {getClassifications, getInventoryByClassificationId, getInventoryDataByinvId, addClassification, addInventoryItem, updateInventoryItem, deleteInventoryItem};

@@ -1,0 +1,40 @@
+<h1><%= title %></h1>
+
+<% if (errors) { %>
+  <ul class="notice">
+ <% errors.array().forEach(error => { %>
+   <li><%= error.msg %></li>
+<%  }) %>
+ </ul>
+<% } %>
+<%- messages() %>
+
+<div class="form-login-desktop">
+    <div class="form-login">
+        <form action="/inv/delete/<%= locals.inv_id %>" method="post">
+            <div class="pword">
+                <span>Confirm Deletion - The delete is permanent.</span>
+            </div>
+
+            <label for="inv_make"><strong>Make</strong></label>
+            <input type="text" name="inv_make" id="invMake" value="<%= locals.inv_make %>" readonly>
+
+            <label for="inv_model"><strong>Model</strong></label>
+            <input type="text" name="inv_model" id="invModel" value="<%= locals.inv_model %>" readonly>
+
+            <label for="inv_price"><strong>Price</strong></label>
+            <input type="number" name="inv_price" id="inPrice" value="<%= locals.inv_price %>" readonly>
+
+            <label for="inv_year"><strong>Year</strong></label>
+            <input type="number" name="inv_year" id="invYear" value="<%= locals.inv_year %>" readonly>
+
+            <input type="hidden" name="inv_id" <% if(locals.inv_id) { %> value="<%= locals.inv_id %>"<% } %>>
+
+            <div class="form-login-submit">
+                <p>
+                    <input type="submit" name="submit" title="Delete Vehicle" value="Delete Vehicley">
+                </p>
+            </div>
+        </form>
+    </div>
+</div>

@@ -10,6 +10,14 @@
 <%- messages() %>
 
 <div>
-    <p>You're logged in.</p>
-    <a href="">Edit Account Information</a>
+    <% if (locals.loggedin && accountData.account_type == 'Admin' || accountData.account_type == 'Employee') { %>
+      <h2>Welcome <%= accountData.account_firstname %>! </h2>
+      <p><a href="update/<%= accountData.account_id %>">update account information</a></p>
+      <h3>Inventory Management</h3>
+      <p><a href="/inv/management">Acess Inventory Management</a></p>
+      <p></p>
+    <% } else { %>
+    <h2>Welcome <%= accountData.account_firstname %>! </h2>
+    <p><a href="update/<%= accountData.account_id %>">update account information</a></p>
+    <% } %>
 </div>
