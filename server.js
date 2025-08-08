@@ -18,6 +18,7 @@ const addClassificationRoute = require("./routes/addClassificationRoute");
 const addInventoryRoute = require("./routes/addInventoryRoute");
 const errorRoute = require('./routes/errorRoute');
 const accountRoute = require('./routes/accountRoute');
+const favoriteRoute = require("./routes/favoriteRoute")
 const utilities = require("./utilities");
 const session = require("express-session");
 const pool = require('./database/');
@@ -80,6 +81,8 @@ app.use('/inv', utilities.handleErrors(managementRoute));
 app.use('/inv', utilities.handleErrors(addClassificationRoute));
 // Add classification routes
 app.use('/inv', utilities.handleErrors(addInventoryRoute));
+// Add favorite routes
+app.use('/inv', utilities.handleErrors(favoriteRoute));
 // error test routes
 app.use('/', utilities.handleErrors(errorRoute));
 // Account routes

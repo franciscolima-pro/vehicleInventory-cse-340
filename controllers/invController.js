@@ -360,4 +360,92 @@ invCont.deleteInventory = async function (req, res, next) {
   }
 }
 
+/**
+ * Adiciona um veículo aos favoritos
+ */
+invCont.addFavorite = async function (req, res, next) {
+  try {
+    const account_id = res.locals.accountData.account_id;
+    const inv_id = req.body.inv_id;
+    await invModel.addFavorite(account_id, inv_id);
+
+    const invData = await invModel.getInventoryDataByinvId(inv_id)
+    const classification_id = req.params.classification_id
+    const data = await invModel.getInventoryByClassificationId(classification_id)
+    const grid = await utilities.buildClassificationGrid(data)
+    let nav = await utilities.getNav()
+    const className = data[0].classification_name
+
+    req.flash("notice", `${invData[0].inv_make} ${invData[0].inv_model} added to yours favorites!`);
+
+    res.render("./inventory/classification", {
+      title: className + " vehicles",
+      nav,
+      grid,
+      errors: null,
+    })
+  } catch (error) {
+    const account_id = res.locals.accountData.account_id;
+    const inv_id = req.body.inv_id;
+
+    const invData = await invModel.getInventoryDataByinvId(inv_id)
+    const classification_id = req.params.classification_id
+    const data = await invModel.getInventoryByClassificationId(classification_id)
+    const grid = await utilities.buildClassificationGrid(data)
+    let nav = await utilities.getNav()
+    const className = data[0].classification_name
+
+    console.log("addfavorite error:", error)
+    if (error.message.includes("duplicate key value violates unique constraint")) {
+      await invModel.removeFavorite(account_id, inv_id)
+      req.flash("notice", `${invData[0].inv_make} ${invData[0].inv_model} was removed from your favorites!`);
+    } else {
+      req.flash("notice", "❌ Failed to add to favorites!");
+      console.error("addFavorite error:", error);
+    }
+    res.render("./inventory/classification", {
+      title: className + " vehicles",
+      nav,
+      grid,
+      errors: null,
+    })
+  }
+}
+
+/**
+ * Remove um veículo dos favoritos
+ */
+invCont.removeFavorite = async function (req, res, next) {
+  try {
+    const account_id = res.locals.accountData.account_id;
+    const { inv_id } = req.body;
+
+    await favoritesModel.removeFavorite(account_id, inv_id);
+    req.flash("notice", "Veículo removido dos favoritos!");
+    // res.redirect("back");
+  } catch (error) {
+    next(error);
+  }
+}
+
+/**
+ * Exibe os veículos favoritos do usuário
+ */
+invCont.showFavorites = async function (req, res, next) {
+  try {
+    const account_id = res.locals.account_id;
+    const favorites = await favoritesModel.getUserFavorites(account_id);
+    const nav = await utilities.getNav();
+
+    res.render("./inv/favorites", {
+      title: "Meus Favoritos",
+      nav,
+      favorites,
+      errors: null,
+    });
+  } catch (error) {
+    next(error);
+  }
+}
+
   module.exports = invCont

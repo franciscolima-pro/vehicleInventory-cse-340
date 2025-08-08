@@ -30,6 +30,7 @@ Util.getNav = async function (req, res, next) {
 * Build the classification view HTML
 * ************************************ */
 Util.buildClassificationGrid = async function(data){
+
   let grid
   if(data.length > 0){
     grid = '<ul id="inv-display">'
@@ -40,8 +41,8 @@ Util.buildClassificationGrid = async function(data){
       + 'details"><img src="' + vehicle.inv_thumbnail 
       +'" alt="Image of '+ vehicle.inv_make + ' ' + vehicle.inv_model 
       +' on CSE Motors" /></a>'
-      grid += '<form method="POST" action="/favorites/add" style="position:absolute; top:0">'
-      grid += '<input type="hidden" name="car_id" value="{{car_id}}">'
+      grid += '<form method="POST" action="/inv/type/' + vehicle.classification_id + '" ' + 'style="position:absolute; top:0">'
+      grid += '<input type="" name="inv_id"' +  'value="' + vehicle.inv_id + '">'
       grid += '<button type="submit" class="favorite-btn">'
       grid +=   '⭐'
       grid += '</button>'
