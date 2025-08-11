@@ -8,6 +8,22 @@ async function getClassifications(){
 }
 
 /* ***************************
+ *  Get all favorite items
+ * ************************** */
+async function getFavorite(account_id, inv_id) {
+  try {
+    const result = await pool.query(
+      'SELECT 1 FROM favorites WHERE account_id = $1 AND inv_id = $2 LIMIT 1',
+      [account_id, inv_id]
+    );
+    return result.rowCount > 0;
+  } catch (error) {
+    console.error("Error in getFavorite:", error);
+    return false;
+  }
+}
+
+/* ***************************
  *  Get all inventory items and classification_name by classification_id
  * ************************** */
 async function getInventoryByClassificationId(classification_id) {
@@ -206,7 +222,7 @@ async function removeFavorite(account_id, inv_id) {
 async function getUserFavorites(account_id) {
   try {
     const sql = `
-      SELECT i.inv_id, i.inv_make, i.inv_model, i.inv_price, i.inv_image
+      SELECT i.inv_id, i.inv_make, i.inv_model, i.inv_price, i.inv_thumbnail
       FROM favorites f
       JOIN inventory i ON f.inv_id = i.inv_id
       WHERE f.account_id = $1
@@ -219,4 +235,4 @@ async function getUserFavorites(account_id) {
   }
 }
 
-module.exports = {getClassifications, getInventoryByClassificationId, getInventoryDataByinvId, addClassification, addInventoryItem, updateInventoryItem, deleteInventoryItem, addFavorite, removeFavorite, getUserFavorites};
+module.exports = {getClassifications, getInventoryByClassificationId, getInventoryDataByinvId, addClassification, addInventoryItem, updateInventoryItem, deleteInventoryItem, addFavorite, removeFavorite, getUserFavorites, getFavorite};

@@ -8,7 +8,7 @@ const regValidate = require('../utilities/account-validation');
  * Rota para exibir todos os favoritos do usuário 
  * GET /favorites
 */
-router.get("/favorites", invController.showFavorites);
+router.get("/favorites", utilities.checkJWTToken, invController.showFavorites);
 
 /**
  * Rota para adicionar um favorito

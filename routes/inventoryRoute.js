@@ -6,7 +6,7 @@ const invController = require("../controllers/invController");
 const regValidate = require('../utilities/account-validation');
 
 // Route to build inventory by classification view
-router.get("/type/:classificationId", utilities.handleErrors(invController.buildByClassificationId)); //links geralmente enviam requisiçoes via GET, por isso no link dessa rota usa-se get.
+router.get("/type/:classificationId", utilities.checkJWTToken, utilities.handleErrors(invController.buildByClassificationId)); //links geralmente enviam requisiçoes via GET, por isso no link dessa rota usa-se get.
 
 router.get("/getInventory/:classification_id", utilities.handleErrors(invController.getInventoryJSON));
 
