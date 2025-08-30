@@ -4,7 +4,7 @@
 ![Express](https://img.shields.io/badge/express-000000.svg?style=for-the-badge&logo=express&logoColor=white)
 ![PostgreSQL](https://img.shields.io/badge/postgresql-336791.svg?style=for-the-badge&logo=postgresql&logoColor=white)
 ![EJS](https://img.shields.io/badge/ejs-2C3E50.svg?style=for-the-badge&logo=ejs&logoColor=white)
-![JavaScript](https://img.shields.io/badge/javascript-F7DF1E.svg?style=for-the-badge&logo=javascript&logoColor=black)
+![JavaScript](https://img.shields.io/badge/javascript-F7DF1E.svg?style=for-the-badge&logo=javascript&logoColor=black)</br>
 
 Um sistema de inventário de veículos desenvolvido com **Node.js**, **Express** e **PostgreSQL**, seguindo a arquitetura **MVC**.  
 O projeto permite gerenciar veículos por classificação e oferece diferentes níveis de acesso: visitantes, usuários autenticados e administradores.
