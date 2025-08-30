@@ -1,47 +1,95 @@
-## Getting Started
+# 🚗 Vehicle Inventory MVC
 
-This document is intended to get you started quickly in building a backend driven Node.js application complete with pages and content, backend logic and a PostgreSQL database for data storage.
-## Prerequisites
+![Node.js](https://img.shields.io/badge/node.js-339933.svg?style=for-the-badge&logo=node.js&logoColor=white)
+![Express](https://img.shields.io/badge/express-000000.svg?style=for-the-badge&logo=express&logoColor=white)
+![PostgreSQL](https://img.shields.io/badge/postgresql-336791.svg?style=for-the-badge&logo=postgresql&logoColor=white)
+![EJS](https://img.shields.io/badge/ejs-2C3E50.svg?style=for-the-badge&logo=ejs&logoColor=white)
+![JavaScript](https://img.shields.io/badge/javascript-F7DF1E.svg?style=for-the-badge&logo=javascript&logoColor=black)
 
-The only prerequisite software required to have installed at this point is Git for version control and a code editor - we will use VS Code (VSC).
+Um sistema de inventário de veículos desenvolvido com **Node.js**, **Express** e **PostgreSQL**, seguindo a arquitetura **MVC**.  
+O projeto permite gerenciar veículos por classificação e oferece diferentes níveis de acesso: visitantes, usuários autenticados e administradores.
+DEMONSTRAÇÂO: https://drive.google.com/file/d/1_ZoZ2kLMINDjkqaYgXT3uJv3SnWcFIom/view?usp=drive_link
+---
 
-## Package Management
+## ✨ Funcionalidades
 
-The foundation of the project development software is Node. While functional, Node depends on "packages" to add functionality to accomplish common tasks. This requires a package manager. Three common managers are NPM (Node Package Manager), YARN, and PNPM. While all do the same thing, they do it slightly differently. We will use PNPM for two reasons: 1) All packages are stored on your computer only once and then symlinks (system links) are created from the package to the project as needed, 2) performance is increased meaning that when the project builds, it does so faster.
-You will need to either install or activate PNPM before using it. See https://pnpm.io/
+- 🔎 **Visualização pública**
+  - Qualquer visitante pode navegar pelas classificações e ver todos os veículos.
 
-## Install the Project Dependencies
+- 👤 **Conta de usuário**
+  - Cadastro e login de usuários.
+  - Possibilidade de **favoritar veículos** para consulta rápida.
 
-1. Open the downloaded project folder (where this file is located) in VS Code (VSC).
-2. Open the VSC terminal: Terminal > New Window.
-3. Run the following command in the terminal:
+- 🛠️ **Área administrativa**
+  - Usuários com privilégio de administrador podem:
+    - ➕ Adicionar novos veículos
+    - ✏️ Editar informações existentes
+    - ❌ Remover veículos
 
-    pnpm install
+---
 
-4. The first time it may take a few minutes, depending on the speed of your computer and the speed of your Internet connection. This command will instruct PNPM to read the package.json file and download and install the dependencies (packages) needed for the project. It will build a "node_modules" folder storing each dependency and its dependencies. It should also create a pnpm-lock.yaml file. This file should NEVER be altered by you. It is an internal file (think of it as an inventory) that PNPM uses to keep track of everything in the project.
+## 🛠️ Tecnologias e Dependências
 
-## Start the Express Server
+- **Servidor & Frameworks**
+  - [Express](https://expressjs.com/)
+  - [Express EJS Layouts](https://www.npmjs.com/package/express-ejs-layouts)
+  - [EJS](https://ejs.co/) (template engine)
+  
+- **Banco de Dados**
+  - [PostgreSQL](https://www.postgresql.org/) com [pg](https://node-postgres.com/)
+  - [connect-pg-simple](https://www.npmjs.com/package/connect-pg-simple) (sessões)
 
-With the packages installed you're ready to run the initial test.
-1. If the VSC terminal is still open use it. If it is closed, open it again using the same command as before.
-2. Type the following command, then press Enter:
+- **Autenticação & Segurança**
+  - [bcryptjs](https://www.npmjs.com/package/bcryptjs) (hash de senhas)
+  - [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken) (tokens JWT)
+  - [express-session](https://www.npmjs.com/package/express-session)
+  - [cookie-parser](https://www.npmjs.com/package/cookie-parser)
 
-    pnpm run dev
+- **Validações & Middleware**
+  - [express-validator](https://express-validator.github.io/)
+  - [body-parser](https://www.npmjs.com/package/body-parser)
+  - [connect-flash](https://www.npmjs.com/package/connect-flash)
+  - [express-messages](https://www.npmjs.com/package/express-messages)
+  - [dotenv](https://www.npmjs.com/package/dotenv)
 
-3. If the command works, you should see the message "app listening on localhost:5500" in the console.
-4. Open the package.json file.
-5. Note the "Scripts" area? There is a line with the name of "dev", which tells the nodemon package to run the server.js file.
-6. This is the command you just ran.
-7. Open the server.js file.
-8. Near the bottom you'll see two variables "Port" and "Host". The values for the variables are stored in the .env file.
-9. These variables are used when the server starts on your local machine.
+---
 
-## Move the demo file
+## 📂 Estrutura do Projeto (MVC)
 
-When you installed Git and cloned the remote repository in week 1, you should have created a simple web page.
-1. Find and move that simple web page to the public folder. Be sure to note its name.
-## Test in a browser
+├── controllers/ # Lógica da aplicação
+├── models/ # Regras de negócio e acesso ao BD
+├── routes/ # Definição de rotas
+├── views/ # Páginas EJS
+├── public/ # Arquivos estáticos (css, js, imagens)
+├── config/ # Configurações (DB, auth, etc.)
+└── app.js # Ponto de entrada
 
-1. Go to http://localhost:5500 in a browser tab. Nothing should be visible as the server has not been setup to repond to that route.
-2. Add "/filename.html" to the end of the URL (replacing filename with the name of the file you moved to the public folder).
-3. You should see that page in the browser.
+---
+
+## 🚀 Como rodar o projeto
+
+### 1. Clonar o repositório
+bash
+- git clone https://github.com/seu-usuario/vehicle-inventory-mvc.git
+- cd vehicle-inventory-mvc
+### 2. Instalar dependências
+- pnpm install
+### 3. Configurar variáveis de ambiente
+PORT=3000
+DATABASE_URL=postgres://usuario:senha@localhost:5432/nomedobanco
+JWT_SECRET=sua_chave_secreta
+SESSION_SECRET=outra_chave_secreta
+### 4. Rodar o servidor
+- pnpm start
+### 5. Acessar no navegador
+- http://localhost:3000
+  
+- ---
+
+👥 Perfis de Usuário
+
+Visitante: pode navegar e visualizar todos os veículos por classificação.
+
+Usuário autenticado: pode favoritar veículos.
+
+Administrador: pode adicionar, editar e excluir veículos.
