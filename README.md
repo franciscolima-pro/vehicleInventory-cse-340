@@ -57,12 +57,12 @@ DEMONSTRAÇÃO: https://drive.google.com/file/d/1_ZoZ2kLMINDjkqaYgXT3uJv3SnWcFIo
 
 ## 📂 Estrutura do Projeto (MVC)
 
-├── controllers/ # Lógica da aplicação
-├── models/ # Regras de negócio e acesso ao BD
-├── routes/ # Definição de rotas
-├── views/ # Páginas EJS
-├── public/ # Arquivos estáticos (css, js, imagens)
-├── config/ # Configurações (DB, auth, etc.)
+├── controllers/ # Lógica da aplicação</br>
+├── models/ # Regras de negócio e acesso ao BD</br>
+├── routes/ # Definição de rotas</br>
+├── views/ # Páginas EJS</br>
+├── public/ # Arquivos estáticos (css, js, imagens)</br>
+├── config/ # Configurações (DB, auth, etc.)</br>
 └── app.js # Ponto de entrada
 
 ---
