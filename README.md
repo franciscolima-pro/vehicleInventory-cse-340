@@ -76,9 +76,9 @@ bash
 ### 2. Instalar dependências
 - pnpm install
 ### 3. Configurar variáveis de ambiente
-PORT=3000
-DATABASE_URL=postgres://usuario:senha@localhost:5432/nomedobanco
-JWT_SECRET=sua_chave_secreta
+PORT=3000</br>
+DATABASE_URL=postgres://usuario:senha@localhost:5432/nomedobanco</br>
+JWT_SECRET=sua_chave_secreta</br>
 SESSION_SECRET=outra_chave_secreta
 ### 4. Rodar o servidor
 - pnpm start
