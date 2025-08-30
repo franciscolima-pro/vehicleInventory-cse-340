@@ -8,7 +8,8 @@
 
 Um sistema de inventário de veículos desenvolvido com **Node.js**, **Express** e **PostgreSQL**, seguindo a arquitetura **MVC**.  
 O projeto permite gerenciar veículos por classificação e oferece diferentes níveis de acesso: visitantes, usuários autenticados e administradores.</br>
-DEMONSTRAÇÂO: https://drive.google.com/file/d/1_ZoZ2kLMINDjkqaYgXT3uJv3SnWcFIom/view?usp=drive_link
+
+DEMONSTRAÇÃO: https://drive.google.com/file/d/1_ZoZ2kLMINDjkqaYgXT3uJv3SnWcFIom/view?usp=drive_link
 ---
 
 ## ✨ Funcionalidades
